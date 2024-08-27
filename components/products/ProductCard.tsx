@@ -8,8 +8,8 @@ export function ProductCard({ product }: { product: any }) {
       <Image
         src={product.featuredImage.url}
         alt={product.title}
-        height={500}
-        width={500}
+        height={625}
+        width={625}
         className="rounded-t-lg"
       />
       <div className="px-4 py-6 text-black">

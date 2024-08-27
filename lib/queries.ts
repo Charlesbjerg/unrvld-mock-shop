@@ -89,7 +89,7 @@ export async function getProduct(slug: string) {
 export async function getHomepageProducts() {
   const query = `
     {
-      products(first: 9) {
+      products(first: 12) {
         edges {
           node {
             id
@@ -123,4 +123,52 @@ export async function getHomepageProducts() {
   }
 
   return data.products.edges;
+}
+
+/**
+  Returning an array here to emulate querying an
+  API to return the data.
+*/
+export function getHeroSlides() {
+  return [
+    {
+      title: "mock.shop",
+      content:
+        "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam ullamcorper velit in ornare placerat. Pellentesque maximus sagittis justo, non dapibus lacus cursus sit amet.",
+      image: {
+        url: "/assets/hero-asset-1.jpg",
+        alt: "Hero Slide 1",
+      },
+      cta: {
+        link: "#",
+        title: "Find out more",
+      },
+    },
+    {
+      title: "Sale now on",
+      content:
+        "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam ullamcorper velit in ornare placerat. Pellentesque maximus sagittis justo, non dapibus lacus cursus sit amet.",
+      image: {
+        url: "/assets/hero-asset-2.jpg",
+        alt: "Hero Slide 2",
+      },
+      cta: {
+        link: "#",
+        title: "Shop sale items",
+      },
+    },
+    {
+      title: "Fresh in on the rack",
+      content:
+        "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam ullamcorper velit in ornare placerat. Pellentesque maximus sagittis justo, non dapibus lacus cursus sit amet.",
+      image: {
+        url: "/assets/hero-asset-3.jpg",
+        alt: "Hero Slide 3",
+      },
+      cta: {
+        link: "#",
+        title: "See the latest products",
+      },
+    },
+  ];
 }
