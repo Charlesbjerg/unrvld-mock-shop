@@ -1,27 +1,32 @@
-import { ArrowLongRightIcon } from "@heroicons/react/24/outline";
 import Image from "next/image";
 import Link from "next/link";
+import { ArrowLongRightIcon } from "@heroicons/react/24/outline";
+import ProductMiniOptions from "./ProductMiniOptions";
 
 export function ProductCard({ product }: { product: any }) {
   return (
-    <article key={product.id} className="bg-white rounded-lg shadow-lg">
-      <Image
-        src={product.featuredImage.url}
-        alt={product.title}
-        height={625}
-        width={625}
-        className="rounded-t-lg"
-      />
-      <div className="px-4 py-6 text-black">
-        <h2 className="text-xl tracking-tighter mb-2">{product.title}</h2>
-        <Link
-          href={`/products/${product.handle}`}
-          className="inline-flex items-center gap-x-2 group"
-        >
-          View Product
-          <ArrowLongRightIcon className="w-6 h-6 transition-all group-hover:opacity-50 group-hover:translate-x-2" />
-        </Link>
+    <Link
+      href={`/products/${product.handle}`}
+      key={product.id}
+      className="bg-white rounded-lg shadow-sm group transition-all hover:shadow-lg"
+    >
+      <div className="overflow-hidden aspect-square">
+        <Image
+          src={product.featuredImage.url}
+          alt={product.title}
+          height={625}
+          width={625}
+          className="rounded-t-lg transition-all group-hover:scale-110 group-hover:opacity-75"
+        />
       </div>
-    </article>
+      <div className="px-4 py-6 text-black">
+        <h2 className="text-xl tracking-tighter mb-4 transition-opacity group-hover:opacity-75">
+          {product.title}
+        </h2>
+        {product.options.length > 0 && (
+          <ProductMiniOptions options={product.options} />
+        )}
+      </div>
+    </Link>
   );
 }

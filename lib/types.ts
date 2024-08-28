@@ -74,3 +74,16 @@ export type ProductCollection = {
     }[];
   };
 };
+
+export type FilterQuery = {
+  products: {
+    edges: {
+      node: {
+        options: {
+          name: string;
+          values: string[];
+        };
+      }[];
+    }[];
+  };
+};

@@ -3,6 +3,7 @@ import NavigationBar from "./NavigationBar";
 import { getMenuCollections } from "@/lib/queries";
 import { BanknotesIcon } from "@heroicons/react/24/outline";
 import { PaperAirplaneIcon } from "@heroicons/react/24/outline";
+import { Button } from "./ui/button";
 
 export default async function Header() {
   const menuCategories = await getMenuCollections();
@@ -20,13 +21,12 @@ export default async function Header() {
       </div>
       <NavigationBar categories={menuCategories} />
       <div className="w-1/4 text-right">
-        <Link
-          href="#"
-          className="inline-flex items-center gap-x-2 px-4 py-2 text-sm rounded-lg bg-violet-500 transition-colors hover:bg-opacity-50"
-        >
-          Example CTA
-          <PaperAirplaneIcon className="w-5 h-5" />
-        </Link>
+        <Button asChild>
+          <Link href="#" className="inline-flex items-center gap-x-2">
+            Example CTA
+            <PaperAirplaneIcon className="w-5 h-5" />
+          </Link>
+        </Button>
       </div>
     </header>
   );

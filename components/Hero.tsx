@@ -27,7 +27,6 @@ export default function Hero({ slides }: IProps) {
   return (
     <Swiper
       modules={[Pagination, Autoplay]}
-      spaceBetween={50}
       slidesPerView={1}
       pagination={{ clickable: true }}
       autoplay={{ delay: 10000 }}
@@ -43,7 +42,7 @@ export default function Hero({ slides }: IProps) {
             priority={index === 0}
           />
           <div className="absolute inset-0 z-[1] flex items-center p-20 bg-black/50">
-            <div className="max-w-xl">
+            <div className="max-w-xl text-white">
               <h1 className="text-5xl font-bold tracking-tighter mb-8">
                 {item.title}
               </h1>
