@@ -5,10 +5,10 @@ export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs));
 }
 
-/*
-Takes a set of URLSearchParams and prepares them for a
-Shopify Storefront GraphQL query.
-*/
+/**
+ * Takes a set of URLSearchParams and prepares them for a
+ * Shopify Storefront GraphQL query.
+ */
 export function prepareFiltersForQuery(params: URLSearchParams) {
   let filters = [];
 
@@ -32,9 +32,9 @@ export function prepareFiltersForQuery(params: URLSearchParams) {
 }
 
 /**
-Takes a sort order key and prepares it for a Shopify Storefront
-GraphQL query.
-*/
+ * Takes a sort order key and prepares it for a Shopify 
+ * Storefront GraphQL query.
+ */
 export function prepareSortForQuery(sortKey: string | null) {
   let key = "";
 

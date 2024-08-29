@@ -4,7 +4,6 @@ import { getHomepageProducts, getProductFilters } from "@/lib/queries";
 import SortOrder from "./SortOrder";
 import GridFilters from "./GridFilters";
 import ClearFilters from "./ClearFilters";
-import { Suspense } from "react";
 
 export default async function ProductGrid({
   activeFilters,

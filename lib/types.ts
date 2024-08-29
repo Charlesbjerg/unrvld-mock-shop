@@ -107,3 +107,15 @@ export type FilterQuery = {
     }[];
   };
 };
+
+export type AllProducts = {
+  products: {
+    edges: {
+      node: {
+        id: string;
+        title: string;
+        handle: string;
+      };
+    }[];
+  };
+};

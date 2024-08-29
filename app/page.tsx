@@ -12,3 +12,7 @@ export default async function Home({ searchParams }: { searchParams?: any }) {
     </div>
   );
 }
+
+export const metadata = {
+  title: "Homepage | mock.shop",
+};

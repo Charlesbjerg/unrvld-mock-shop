@@ -1,5 +1,6 @@
 import { apiFetcher } from "./api";
 import {
+  AllProducts,
   Category,
   FilterQuery,
   MenuCollectionsList,
@@ -64,6 +65,30 @@ export async function getHomepageProducts(filters: URLSearchParams) {
   return data.products.edges;
 }
 
+export async function getAllProducts() {
+  const query = `
+    {
+      products(first: 30) {
+        edges {
+          node {
+            id
+            title
+            handle
+          }
+        }
+      }
+    }
+  `;
+  const data = await apiFetcher<AllProducts>(query);
+
+  if (!data) {
+    return [];
+  }
+
+  return data.products.edges;
+}
+
+
 export async function getMenuCollections() {
   const query = `
     {
@@ -98,7 +123,7 @@ export async function getCategory(slug: string) {
   const query = `
     {
       collection(handle: "${slug}") {
-              id
+        id
         handle
         title
         description
