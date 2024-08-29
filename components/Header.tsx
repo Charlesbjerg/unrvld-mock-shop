@@ -9,8 +9,8 @@ export default async function Header() {
   const menuCategories = await getMenuCollections();
 
   return (
-    <header className="bg-white flex items-center gap-x-10 px-20 py-4">
-      <div className="w-1/4">
+    <header className="bg-white flex flex-wrap items-center gap-x-10 px-8 lg:px-20 py-4">
+      <div className="w-1/5">
         <Link
           href="/"
           className="text-black inline-flex items-center gap-x-4 tracking-tighter"
@@ -20,7 +20,7 @@ export default async function Header() {
         </Link>
       </div>
       <NavigationBar categories={menuCategories} />
-      <div className="w-1/4 text-right">
+      <div className="w-1/5 text-right hidden md:block">
         <Button asChild>
           <Link href="#" className="inline-flex items-center gap-x-2">
             Example CTA

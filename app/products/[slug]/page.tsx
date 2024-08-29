@@ -1,12 +1,10 @@
 import { getProduct } from "@/lib/queries";
 import { notFound } from "next/navigation";
 import Image from "next/image";
+import { Button } from "@/components/ui/button";
 
 export default async function Page({ params }: { params: { slug: string } }) {
-  // TODO: Update to pull through products
   const product = await getProduct(params.slug);
-
-  console.log("product", params.slug, product);
 
   if (!product) {
     notFound();
@@ -25,10 +23,17 @@ export default async function Page({ params }: { params: { slug: string } }) {
           />
         </div>
         <section>
-          <h1 className="text-white text-4xl -tracking-widest mb-4">
+          <h1 className="font-bold text-5xl tracking-tighter mb-4">
             {product.title}
           </h1>
-          {product.description !== "" && <p>{product.description}</p>}
+          <p className="text-xl mb-4">
+            ${product.priceRange.minVariantPrice.amount}{" "}
+            {product.priceRange.minVariantPrice.currencyCode}
+          </p>
+          {product.description !== "" && (
+            <p className="mb-4">{product.description}</p>
+          )}
+          <Button>Buy product</Button>
         </section>
       </div>
     </div>

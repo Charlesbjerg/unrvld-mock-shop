@@ -26,13 +26,23 @@ export type Category = {
       id: string;
       url: string;
     };
-    products: {
-      nodes: {
+  };
+  products: {
+    nodes: {
+      id: string;
+      title: string;
+      handle: string;
+      description: string;
+      featuredImage: {
         id: string;
-        title: string;
-        handle: string;
+        url: string;
+      };
+      options: {
+        id: string;
+        name: string;
+        values: string[];
       }[];
-    };
+    }[];
   };
 };
 
@@ -44,6 +54,16 @@ export type Product = {
     featuredImage: {
       id: string;
       url: string;
+    };
+    priceRange: {
+      minVariantPrice: {
+        amount: number;
+        currencyCode: string;
+      };
+      maxVariantPrice: {
+        amount: number;
+        currencyCode: string;
+      };
     };
   };
 };
@@ -60,16 +80,16 @@ export type ProductCollection = {
           id: string;
           url: string;
         };
-        variants: {
-          edges: {
-            node: {
-              price: {
-                amount: number;
-                currencyCode: string;
-              };
-            };
+        priceRange: {
+          minVariantPrice: {
+            amount: number;
+            currencyCode: string;
           };
-        }[];
+          maxVariantPrice: {
+            amount: number;
+            currencyCode: string;
+          };
+        };
       };
     }[];
   };

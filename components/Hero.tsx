@@ -41,7 +41,7 @@ export default function Hero({ slides }: IProps) {
             className="w-full h-[calc(100vh-4.4rem)] object-cover"
             priority={index === 0}
           />
-          <div className="absolute inset-0 z-[1] flex items-center p-20 bg-black/50">
+          <div className="absolute inset-0 z-[1] flex items-center p-8 lg:p-20 bg-black/50">
             <div className="max-w-xl text-white">
               <h1 className="text-5xl font-bold tracking-tighter mb-8">
                 {item.title}

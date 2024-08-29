@@ -8,6 +8,62 @@ import {
 } from "./types";
 import { prepareFiltersForQuery, prepareSortForQuery } from "./utils";
 
+/**
+ * There's some strange behaviour going on with this GraphQL API.
+ * Passing a size stops any products from being returned,
+ * whereas passing a colour leads to all products being returned.
+ *
+ * Tried about 5/6 different syntax combinations for applying the
+ * filters, including querying through a collection and none of
+ * them seem to work correctly.
+ */
+export async function getHomepageProducts(filters: URLSearchParams) {
+  const filterString = prepareFiltersForQuery(filters);
+  const sortOrderString = prepareSortForQuery(filters.get("sort"));
+
+  const query = `
+    {
+      products(first: 12, ${filterString}, ${sortOrderString}) {
+        edges {
+          node {
+            id
+            title
+            handle
+            description
+            featuredImage {
+              id
+              url
+            }
+            options {
+              id
+              name
+              values
+            }
+            priceRange {
+              minVariantPrice {
+                amount
+                currencyCode
+              }
+              maxVariantPrice {
+                amount
+                currencyCode
+              }
+            }
+          }
+        }
+      }
+    }
+  `;
+
+  const data = await apiFetcher<ProductCollection>(query);
+
+  if (!data) {
+    return false;
+  }
+
+  return data.products.edges;
+}
+
 export async function getMenuCollections() {
   const query = `
     {
@@ -42,14 +98,41 @@ export async function getCategory(slug: string) {
   const query = `
     {
       collection(handle: "${slug}") {
-        id
+              id
         handle
         title
         description
-        image {
-          id
-          url
+          image {
+            id
+            url
+          }
         }
+        products(first: 12) {
+          nodes {
+            id
+            title
+            handle
+            description
+            featuredImage {
+              id
+              url
+            }
+            options {
+              id
+              name
+              values
+            }
+            priceRange {
+              minVariantPrice {
+                amount
+                currencyCode
+              }
+              maxVariantPrice {
+                amount
+                currencyCode
+              }
+            }
+          }
         }
     }
   `;
@@ -74,6 +157,16 @@ export async function getProduct(slug: string) {
           id
           url
         }
+        priceRange {
+          minVariantPrice {
+            amount
+            currencyCode
+          }
+          maxVariantPrice {
+            amount
+            currencyCode
+          }
+        }
       }
     }
 
@@ -86,45 +179,6 @@ export async function getProduct(slug: string) {
   }
 
   return data.product;
-}
-
-export async function getHomepageProducts(filters: URLSearchParams) {
-  const filterString = prepareFiltersForQuery(filters);
-  const sortOrderString = prepareSortForQuery(filters.get("sort"));
-
-  const query = `
-    {
-      products(first: 12, ${filterString}, ${sortOrderString}) {
-        edges {
-          node {
-            id
-            title
-            handle
-            description
-            featuredImage {
-              id
-              url
-            }
-            options {
-              id
-              name
-              values
-            }
-          }
-        }
-      }
-    }
-  `;
-
-  console.log("✨ querying ✨", query);
-
-  const data = await apiFetcher<ProductCollection>(query);
-
-  if (!data) {
-    return false;
-  }
-
-  return data.products.edges;
 }
 
 export async function getProductFilters() {
@@ -169,9 +223,9 @@ export async function getProductFilters() {
 }
 
 /**
-  Returning an array here to emulate querying an
-  API to return the data.
-*/
+ * Returning an array here to emulate querying an
+ * API to return the data.
+ */
 export function getHeroSlides() {
   return [
     {

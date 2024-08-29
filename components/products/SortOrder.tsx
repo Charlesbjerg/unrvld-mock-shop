@@ -34,7 +34,7 @@ export default function SortOrder() {
       <label className="mb-2 inline-block text-sm">Sort by</label>
       <Select onValueChange={handleFilterChange} defaultValue={activeSortOrder}>
         <SelectTrigger>
-          <SelectValue placeholder="Sort products" />
+          <SelectValue placeholder="Sort by" />
         </SelectTrigger>
         <SelectContent>
           <SelectItem value="default">Default</SelectItem>
