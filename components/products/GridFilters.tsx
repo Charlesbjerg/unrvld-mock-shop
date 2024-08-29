@@ -9,9 +9,12 @@ import {
   AccordionTrigger,
 } from "../ui/accordion";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
-import { Button } from "../ui/button";
 
-export default function GridFilters({ filters }: { filters: any }) {
+interface IProps {
+  filters: { [key: string]: string[] };
+}
+
+export default function GridFilters({ filters }: IProps) {
   const searchParams = useSearchParams();
   const router = useRouter();
   const pathname = usePathname();

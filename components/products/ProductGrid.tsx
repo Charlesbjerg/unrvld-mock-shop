@@ -21,16 +21,20 @@ export default async function ProductGrid({
       <div className="lg:flex">
         <div className="p-4 bg-white rounded-lg text-black lg:w-1/5">
           <aside className="sticky top-8">
-            <GridFilters filters={filters} />
+            {filters && <GridFilters filters={filters} />}
             <SortOrder />
             <ClearFilters />
           </aside>
         </div>
-        <div className="product-grid lg:flex-1">
-          {products.map((product: any) => (
-            <ProductCard key={product.node.id} product={product.node} />
-          ))}
-        </div>
+        {products ? (
+          <div className="product-grid lg:flex-1">
+            {products.map((product: any) => (
+              <ProductCard key={product.node.id} product={product.node} />
+            ))}
+          </div>
+        ) : (
+          <div className="text-center py-20">No products found</div>
+        )}
       </div>
     </section>
   );

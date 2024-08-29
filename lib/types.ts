@@ -82,8 +82,8 @@ export type FilterQuery = {
         options: {
           name: string;
           values: string[];
-        };
-      }[];
+        }[];
+      };
     }[];
   };
 };

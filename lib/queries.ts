@@ -6,7 +6,7 @@ import {
   Product,
   ProductCollection,
 } from "./types";
-import { prepareFiltersForQuery } from "./utils";
+import { prepareFiltersForQuery, prepareSortForQuery } from "./utils";
 
 export async function getMenuCollections() {
   const query = `
@@ -90,10 +90,11 @@ export async function getProduct(slug: string) {
 
 export async function getHomepageProducts(filters: URLSearchParams) {
   const filterString = prepareFiltersForQuery(filters);
+  const sortOrderString = prepareSortForQuery(filters.get("sort"));
 
   const query = `
     {
-      products(first: 12, ${filterString ? `query: "${filterString}"` : ""}) {
+      products(first: 12, ${filterString}, ${sortOrderString}) {
         edges {
           node {
             id
